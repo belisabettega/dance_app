@@ -38,6 +38,7 @@ gem "font-awesome-rails"
 gem 'devise'
 gem 'pundit'
 gem 'cloudinary', '~> 1.16.0'
+gem 'webpacker'
 
 
 group :development, :test do

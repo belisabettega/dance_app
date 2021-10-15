@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   include Pundit
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   after_action :verify_authorized, except: :home, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :home, unless: :skip_pundit?
 
@@ -9,6 +11,13 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     redirect_to(root_path)
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :photo])
+
+    # For additional in app/views/devise/registrations/edit.html.erb
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :photo])
   end
 
   private
