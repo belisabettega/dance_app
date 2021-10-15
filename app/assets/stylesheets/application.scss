@@ -1,23 +1,8 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "font-awesome";
+@import "components/card";
+@import "components/navbar";
 
-
-.navbar-lewagon {
-  justify-content: space-between;
-  background-color: #f6f8fA;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 80px;
-}
-
-.navbar-nav {
-  align-items: center;
-}
 
 .home-banner{
   background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), asset-url("tango.jpeg");
