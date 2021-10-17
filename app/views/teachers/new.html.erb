@@ -1,0 +1,9 @@
+<div class="container my-5">
+  <%= simple_form_for(@teacher) do |f| %>
+    <%= f.input :description, label: "Please describe the class you're offering" %>
+    <%= f.input :price, label: "What would be the price (in pounds) per hour?" %>
+    <%= f.input :address, label: "In which address would the classes take place?" %>
+    <%= f.input :photo, as: :file, label: "Upload a photo to illustrate your class style" %>
+    <%= f.submit %>
+  <% end %>
+</div>

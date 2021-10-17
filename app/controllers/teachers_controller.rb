@@ -13,4 +13,25 @@ class TeachersController < ApplicationController
       }
     end
   end
+
+  def new
+    @teacher = Teacher.new
+    authorize @teacher
+  end
+
+  def create
+    @teacher = Teacher.new(teacher_params)
+    authorize @teacher
+    if @teacher.save
+      redirect_to teachers_path
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def teacher_params
+    params.require(:teacher).permit(:description, :photo, :price, :address)
+  end
 end
