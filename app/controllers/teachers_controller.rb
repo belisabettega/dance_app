@@ -4,5 +4,12 @@ class TeachersController < ApplicationController
 
   def index
     @teachers = policy_scope(Teacher)
+
+    @markers = @teachers.geocoded.map do |teacher|
+      {
+        lat: teacher.latitude,
+        lng: teacher.longitude
+      }
+    end
   end
 end

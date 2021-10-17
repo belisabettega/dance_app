@@ -15,4 +15,11 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 import 'bootstrap';
+import { initMapbox } from '../plugins/init_mapbox';
+
+document.addEventListener('turbolinks:load', () => {
+  initMapbox();
+})
