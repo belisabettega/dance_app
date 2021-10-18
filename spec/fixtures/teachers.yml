@@ -1,0 +1,10 @@
+mariana:
+  user: mariana
+  description: "In this salsa class I'll show students how to warm up and move safely, demonstrate how to perform dance moves and give them feedback."
+  price: 30
+  address: "Marlborough School, Draycott Ave, SW3 3AP"
+carlos:
+  user: carlos
+  description: "In this salsa class I'll show students how"
+  price: 30
+  address: "Marlborough School, Draycott Ave, SW3 3AP"

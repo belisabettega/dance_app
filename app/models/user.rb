@@ -4,4 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :photo
+
+  validates :full_name, presence: true, length: { minimum: 2 }
+  validates :full_name, format: { with: /[^A-Za-z0-9]+/, message: "only allows letters" }
 end
