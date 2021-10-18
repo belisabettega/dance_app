@@ -1,0 +1,14 @@
+<div class="container">
+
+  <div class="card-product my-5">
+    <% if @teacher.user.photo.attached? %>
+      <%= cl_image_tag @teacher.user.photo.key%>
+    <% else %>
+      <%= image_tag "user.jpg" %>
+    <% end %>
+    <div class="card-product-infos">
+      <h2><%= @teacher.user.full_name%></h2>
+      <p><%= @teacher.description %></p>
+    </div>
+  </div>
+</div>

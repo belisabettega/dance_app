@@ -14,6 +14,11 @@ class TeachersController < ApplicationController
     end
   end
 
+  def show
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
+  end
+
   def new
     @teacher = Teacher.new
     authorize @teacher

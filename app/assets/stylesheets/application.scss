@@ -3,7 +3,7 @@
 @import "components/card";
 @import "components/navbar";
 @import "components/map";
-
+@import "components/profile";
 
 .home-banner{
   background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), asset-url("tango.jpeg");
@@ -70,4 +70,30 @@
   border-radius: 0px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
+}
+
+.map-container {
+  height: 100vh;
+  width: 40%;
+  position: sticky !important;
+  top: 0 !important;
+}
+
+.teachers-list {
+  padding-left: 10px;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .card {
+    width: calc(50% - 10px);
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 300px;
+  }
+}
+
+.app {
+  margin-top: 20px;
+  display: flex;
 }

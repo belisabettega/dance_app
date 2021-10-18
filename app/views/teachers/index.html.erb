@@ -1,23 +1,32 @@
-<div class="container my-5">
-  <% @teachers.each do |teacher|%>
-    <div class="card-trip">
-      <% if teacher.photo.attached? %>
-        <%= cl_image_tag teacher.photo.key, class: "card-trip-banner" %>
-      <% else %>
-        <%= image_tag "dance-class.jpg", class: "card-trip-banner" %>
-      <% end %>
-      <div class="card-trip-infos">
-        <div>
-          <h2><%= teacher.user.full_name %></h2>
-          <p><%= teacher.description %></p>
+<div class="app">
+    <div class="teachers-list">
+      <% @teachers.each do |teacher|%>
+        <div class="card-trip card">
+          <% if teacher.photo.attached? %>
+            <%= cl_image_tag teacher.photo.key, class: "card-trip-banner" %>
+          <% else %>
+            <%= image_tag "dance-class.jpg", class: "card-trip-banner" %>
+          <% end %>
+          <div class="card-trip-infos">
+            <div>
+              <h2><%= teacher.user.full_name %></h2>
+              <p><%= teacher.description %></p>
+            </div>
+            <h2 class="card-trip-pricing">£<%= teacher.price %>/hour</h2>
+            <% if teacher.user.photo.attached? %>
+              <%= cl_image_tag teacher.user.photo.key, class: "card-trip-user avatar-bordered"%>
+            <% else %>
+              <%= image_tag "user.jpg",class: "card-trip-user avatar-bordered" %>
+            <% end %>
+          </div>
         </div>
-        <h2 class="card-trip-pricing">£<%= teacher.price %>/hour</h2>
-        <%= cl_image_tag teacher.user.photo.key, class: "card-trip-user avatar-bordered" %>
+      <% end %>
+    </div>
+    <div class="map-container">
+      <div id="map"
+        style="width: 100%; height: 600px;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
     </div>
-  <% end %>
-  <div id="map"
-     style="width: 100%; height: 600px;"
-     data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 </div>
