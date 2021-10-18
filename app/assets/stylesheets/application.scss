@@ -85,6 +85,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-content: start;
   .card {
     width: calc(50% - 10px);
     margin-right: 10px;
