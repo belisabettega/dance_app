@@ -1,8 +1,8 @@
 <div class="container my-5">
   <h1>Your available slots:</h1>
-    <div class="my-5 d-flex justify-content-around">
+    <div class="my-5 d-flex flex-wrap">
       <% @slots&.each do |slot|%>
-        <div class="card" style="width: 18rem;">
+        <div class="card my-2 mx-2" style="width: 18rem;">
           <div class="card-body">
             <h5 class="card-title"><%= slot.start_time.strftime("%d/%m/%Y") %> </h5>
             <h6 class="card-subtitle mb-2 text-muted"><%= slot.start_time.strftime("%H:%M") %>  - <%= slot.duration%> mins </h6>

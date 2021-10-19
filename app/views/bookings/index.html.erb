@@ -1,10 +1,24 @@
 <div class="container my-5">
+  <h1>Your next classes:</h1>
   <%= month_calendar(events: @bookings) do |date, meetings| %>
     <%= date.day %>
     <% meetings.each do |meeting| %>
     <div>
-      <%= meeting.status %>
+      <%= link_to "#{meeting.start_time.strftime("%H:%M")}  - #{meeting.duration} mins",
+      teacher_path(meeting.teacher), class: "btn btn-outline-secondary my-1" %>
     </div>
     <% end %>
   <% end %>
+    <div class="my-5 d-flex justify-content-around">
+      <% @bookings&.each do |booking|%>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= booking.start_time.strftime("%d/%m/%Y") %> </h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= booking.start_time.strftime("%H:%M") %>  - <%= booking.duration%> mins </h6>
+            <a href="#" class="card-link">Cancel this class</a>
+            <%= link_to "See details", teacher_path(booking.teacher), class: "card-link" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
 </div>
