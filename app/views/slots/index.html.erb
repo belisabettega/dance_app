@@ -1,10 +1,21 @@
-<h1>Slots#index</h1>
-<p>Find me in app/views/slots/index.html.erb</p>
-
 <div class="container my-5">
+  <h1>Your available slots:</h1>
+    <div class="my-5 d-flex justify-content-around">
+      <% @slots&.each do |slot|%>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= slot.start_time.strftime("%d/%m/%Y") %> </h5>
+            <h6 class="card-subtitle mb-2 text-muted"><%= slot.start_time.strftime("%H:%M") %>  - <%= slot.duration%> mins </h6>
+            <a href="#" class="card-link">Reserve this slot</a>
+            <a href="#" class="card-link">Book a class</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <h1>Want to create new slots?</h1>
   <%= simple_form_for(@slot) do |f| %>
     <%= f.input :start_time, label: "Please insert the date and start time" %>
-    <%= f.input :duration, label: "How long will it take?" %>
+    <%= f.input :duration, collection: Slot::DURATION, label: "How long will it take?" %>
     <%= f.submit %>
   <% end %>
 </div>

@@ -17,6 +17,7 @@ class TeachersController < ApplicationController
   def show
     @teacher = Teacher.find(params[:id])
     authorize @teacher
+    @slots = @teacher.slots.where(provisional: true)
   end
 
   def new

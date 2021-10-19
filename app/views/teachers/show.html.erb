@@ -9,6 +9,12 @@
     <div class="card-product-infos">
       <h2><%= @teacher.user.full_name%></h2>
       <p><%= @teacher.description %></p>
+      <% @slots&.each do |slot|%>
+        <%= link_to "#{slot.start_time.strftime("%d/%m/%Y")} - #{slot.start_time.strftime("%H:%M")}  - #{slot.duration} mins", 
+        slot_bookings_path(slot),
+        method: :post,
+        class: "btn btn-outline-secondary" %>
+      <% end %>
     </div>
   </div>
 </div>
