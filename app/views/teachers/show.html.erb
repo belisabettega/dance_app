@@ -15,6 +15,7 @@
       </div>
       <p class="d-block my-3"><%= @teacher.description %></p>
       <p class="d-block my-3">Price per hour: £<%= @teacher.price %></p>
+      <p class="d-block my-3">Address: <%= @teacher.address %></p>
       <h3 class="d-block my-3"> Interessed? Choose a slot below and book a class! </h3>
       <div>
         <% @slots&.each do |slot|%>

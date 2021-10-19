@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   resources :teachers, only: [:index, :show, :new, :create]
   resources :slots, only: [:index, :create] do
+    patch 'reserve', to: 'slots#reserve', as: :reserve
     resources :bookings, only: [:create]
   end
-  resources :bookings, only: [:index]
+  resources :bookings, only: [:index] do
+    patch 'cancel', to: 'bookings#cancel', as: :cancel
+  end
 end

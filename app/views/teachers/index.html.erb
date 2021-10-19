@@ -1,26 +1,29 @@
 <div class="app">
     <div class="teachers-list">
       <% @teachers.each do |teacher|%>
-        <div class="card-trip card">
-          <% if teacher.photo.attached? %>
-            <%= cl_image_tag teacher.photo.key, class: "card-trip-banner" %>
-          <% else %>
-            <%= image_tag "dance-class.jpg", class: "card-trip-banner" %>
-          <% end %>
-          <div class="card-trip-infos">
-            <div>
-              <h2><%= teacher.user.full_name %></h2>
-              <p><%= teacher.description %></p>
-            </div>
-            <h2 class="card-trip-pricing">£<%= teacher.price %>/hour</h2>
-            <% if teacher.user.photo.attached? %>
-              <%= cl_image_tag teacher.user.photo.key, class: "card-trip-user avatar-bordered"%>
+          <div class="card-trip card">
+            <% if teacher.photo.attached? %>
+              <%= cl_image_tag teacher.photo.key, class: "card-trip-banner" %>
             <% else %>
-              <%= image_tag "user.jpg",class: "card-trip-user avatar-bordered" %>
+              <%= image_tag "dance-class.jpg", class: "card-trip-banner" %>
             <% end %>
+            <div class="card-trip-infos">
+              <div>
+                <h2><%= teacher.user.full_name %></h2>
+                <p><%= teacher.description %></p>
+              </div>
+              <h2 class="card-trip-pricing">£<%= teacher.price %>/hour</h2>
+              <% if teacher.user.photo.attached? %>
+                <%= cl_image_tag teacher.user.photo.key, class: "card-trip-user avatar-bordered"%>
+              <% else %>
+                <%= image_tag "user.jpg",class: "card-trip-user avatar-bordered" %>
+              <% end %>
+            </div>
+            <a class="whole-card-link" href="/teachers/<%=teacher.id%>"></a>
           </div>
-        </div>
       <% end %>
+
+
     </div>
     <div class="map-container">
       <div id="map"

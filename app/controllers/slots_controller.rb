@@ -15,6 +15,16 @@ class SlotsController < ApplicationController
     end
   end
 
+  def reserve
+    @slot = Slot.find(params[:slot_id])
+    authorize @slot
+    if @slot.update(provisional: false) && @slot.bookings.map(&:cancel_booking)
+      redirect_to slots_path, notice: "The slot was reserve!"
+    else
+      redirect_to slots_path, notice: "Sorry, something went wrong"
+    end
+  end
+
   private
 
   def slot_params

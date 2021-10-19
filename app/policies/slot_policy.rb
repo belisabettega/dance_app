@@ -12,4 +12,8 @@ class SlotPolicy < ApplicationPolicy
   def create?
     user.is_a_teacher?
   end
+
+  def reserve?
+    record.user == user
+  end
 end
