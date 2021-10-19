@@ -4,6 +4,7 @@
 @import "components/navbar";
 @import "components/map";
 @import "components/profile";
+@import "simple_calendar";
 
 .home-banner{
   background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), asset-url("tango.jpeg");

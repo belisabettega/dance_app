@@ -1,7 +1,7 @@
 class TeacherPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      user&.is_a_teacher? ? scope.all.where.not(user_id: user.id) : scope.all
     end
   end
 

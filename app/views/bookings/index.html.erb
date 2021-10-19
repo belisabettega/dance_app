@@ -1,0 +1,10 @@
+<div class="container my-5">
+  <%= month_calendar(events: @bookings) do |date, meetings| %>
+    <%= date.day %>
+    <% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.status %>
+    </div>
+    <% end %>
+  <% end %>
+</div>

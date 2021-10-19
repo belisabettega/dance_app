@@ -7,14 +7,23 @@
       <%= image_tag "user.jpg" %>
     <% end %>
     <div class="card-product-infos">
-      <h2><%= @teacher.user.full_name%></h2>
-      <p><%= @teacher.description %></p>
-      <% @slots&.each do |slot|%>
-        <%= link_to "#{slot.start_time.strftime("%d/%m/%Y")} - #{slot.start_time.strftime("%H:%M")}  - #{slot.duration} mins", 
-        slot_bookings_path(slot),
-        method: :post,
-        class: "btn btn-outline-secondary" %>
-      <% end %>
+      <h2 class="d-block my-3"><%= @teacher.user.full_name%></h2>
+      <div class="footer-links d-block my-3">
+        <a href="#"> <%= fa_icon "facebook"%> </a>
+        <a href="#"><%= fa_icon "instagram"%></a>
+        <a href="#"><%= fa_icon "twitter"%></a>
+      </div>
+      <p class="d-block my-3"><%= @teacher.description %></p>
+      <p class="d-block my-3">Price per hour: £<%= @teacher.price %></p>
+      <h3 class="d-block my-3"> Interessed? Choose a slot below and book a class! </h3>
+      <div>
+        <% @slots&.each do |slot|%>
+          <%= link_to "#{slot.start_time.strftime("%d/%m/%Y")} - #{slot.start_time.strftime("%H:%M")}  - #{slot.duration} mins", 
+          slot_bookings_path(slot),
+          method: :post,
+          class: "btn btn-outline-secondary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
