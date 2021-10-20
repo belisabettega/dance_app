@@ -6,10 +6,10 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def create?
-    return true
+    user.is_a_teacher? ? record.teacher != user.teacher : true
   end
 
   def cancel?
-    record.user == user
+    record.user == user || record.slot.user == user
   end
 end

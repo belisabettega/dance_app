@@ -19,7 +19,11 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:booking_id])
     authorize @booking
     if @booking.cancel_booking && @booking.slot.update(provisional: true)
-      redirect_to bookings_path, notice: "The booking was cancelled!"
+      if @booking.user == current_user
+        redirect_to bookings_path, notice: "The booking was cancelled!"
+      else
+        redirect_to slots_path, notice: "The booking was cancelled!"
+      end
     else
       redirect_to bookings_path, notice: "Sorry, something went wrong"
     end

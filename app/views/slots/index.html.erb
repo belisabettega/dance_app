@@ -1,6 +1,6 @@
 <div class="container my-5">
   <h1>Your available slots:</h1>
-    <div class="my-5 d-flex flex-wrap">
+    <div class="my-3 d-flex flex-wrap">
       <% @slots&.each do |slot|%>
         <div class="card my-2 mx-2" style="width: 18rem;">
           <div class="card-body text-center">
@@ -18,4 +18,20 @@
     <%= f.input :duration, collection: Slot::DURATION, label: "How long will it take?" %>
     <%= f.submit %>
   <% end %>
+  <div class="my-3">
+    <h1> Your next classes:</h1>
+      <%= month_calendar(events: @bookings) do |date, meetings| %>
+        <%= date.day %>
+        <% meetings.each do |meeting| %>
+            <div style="width: 18rem;">
+              <div class="">
+                <h6 class="btn btn-outline-secondary my-1">
+                  <%= meeting.start_time.strftime("%H:%M") %>  - <%= meeting.duration%> mins <br>
+                  <%= link_to 'Cancel this booking', booking_cancel_path(meeting), method: :patch  %>
+                </h6>
+              </div>
+            </div>
+        <% end %>
+      <% end %>
+  </div>
 </div>

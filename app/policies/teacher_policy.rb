@@ -1,7 +1,7 @@
 class TeacherPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      user&.is_a_teacher? ? scope.all.where.not(user_id: user.id) : scope.all
+      scope.all
     end
   end
 
@@ -10,10 +10,10 @@ class TeacherPolicy < ApplicationPolicy
   end
 
   def new?
-    return true
+    !user&.is_a_teacher?
   end
 
   def create?
-    return true
+    !user&.is_a_teacher?
   end
 end

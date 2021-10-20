@@ -30,7 +30,7 @@ class TeachersController < ApplicationController
     authorize @teacher
     @teacher.user_id = current_user.id
     if @teacher.save
-      redirect_to teachers_path
+      redirect_to teachers_path, notice: "You're a teacher now!"
     else
       render 'new'
     end
