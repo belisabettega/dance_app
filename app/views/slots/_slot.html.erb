@@ -1,0 +1,8 @@
+  <div class="card my-2 mx-2" style="width: 18rem;">
+    <div class="card-body text-center">
+      <h5 class="card-title"><%= slot.start_time.strftime("%d/%m/%Y") %> </h5>
+      <h6 class="card-subtitle mb-2 text-muted"><%= slot.start_time.strftime("%H:%M") %>  - <%= slot.duration%> mins </h6>
+      <%= link_to 'Reserve this slot', slot_reserve_path(slot), method: :patch, class: "btn btn-outline-secondary my-2 reserve", data: { remote: true } %>
+      <a href="#" class="btn btn-outline-secondary my-2">Book a class</a>
+    </div>
+  </div>

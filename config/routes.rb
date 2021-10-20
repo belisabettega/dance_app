@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :teachers, only: [:index, :show, :new, :create]
-  resources :slots, only: [:index, :create] do
+  resources :slots, only: [:index, :new, :create] do
     patch 'reserve', to: 'slots#reserve', as: :reserve
     resources :bookings, only: [:create]
   end

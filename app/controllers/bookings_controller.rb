@@ -1,6 +1,7 @@
 class BookingsController < ApplicationController
   def index
     @bookings = policy_scope(Booking)
+    # @bookings = @bookings.select! do |item| item.slot.start_time >= DateTime.now end
   end
 
   def create
@@ -20,9 +21,17 @@ class BookingsController < ApplicationController
     authorize @booking
     if @booking.cancel_booking && @booking.slot.update(provisional: true)
       if @booking.user == current_user
-        redirect_to bookings_path, notice: "The booking was cancelled!"
+        respond_to do |format|
+          format.js
+          format.html { redirect_to bookings_path, notice: "The booking was cancelled!" }
+          format.json { head :no_content }
+        end
       else
-        redirect_to slots_path, notice: "The booking was cancelled!"
+        respond_to do |format|
+          format.js
+          format.html { redirect_to slots_path, notice: "The booking was cancelled!" }
+          format.json { head :no_content }
+        end
       end
     else
       redirect_to bookings_path, notice: "Sorry, something went wrong"

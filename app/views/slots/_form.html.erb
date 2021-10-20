@@ -1,0 +1,5 @@
+ <%= simple_form_for @slot, remote: true do |f| %>
+    <%= f.input :start_time, label: "Please insert the date and start time" %>
+    <%= f.input :duration, collection: Slot::DURATION, label: "How long will it take?" %>
+    <%= f.submit %>
+  <% end %>

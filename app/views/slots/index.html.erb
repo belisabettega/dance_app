@@ -1,33 +1,21 @@
 <div class="container my-5">
   <h1>Your available slots:</h1>
-    <div class="my-3 d-flex flex-wrap">
-      <% @slots&.each do |slot|%>
-        <div class="card my-2 mx-2" style="width: 18rem;">
-          <div class="card-body text-center">
-            <h5 class="card-title"><%= slot.start_time.strftime("%d/%m/%Y") %> </h5>
-            <h6 class="card-subtitle mb-2 text-muted"><%= slot.start_time.strftime("%H:%M") %>  - <%= slot.duration%> mins </h6>
-            <%= link_to 'Reserve this slot', slot_reserve_path(slot), method: :patch, class: "btn btn-outline-secondary my-2" %>
-            <a href="#" class="btn btn-outline-secondary my-2">Book a class</a>
-          </div>
-        </div>
-      <% end %>
+    <div class="my-3 d-flex flex-wrap" id="slots-list">
+     <%= render @slots %>
     </div>
-  <h1>Want to create new slots?</h1>
-  <%= simple_form_for(@slot) do |f| %>
-    <%= f.input :start_time, label: "Please insert the date and start time" %>
-    <%= f.input :duration, collection: Slot::DURATION, label: "How long will it take?" %>
-    <%= f.submit %>
-  <% end %>
+  <div id="new-slot">
+    <%= link_to "Create a Slot", new_slot_path, remote: true, class: "btn btn-outline-secondary" %>
+  </div>
   <div class="my-3">
     <h1> Your next classes:</h1>
       <%= month_calendar(events: @bookings) do |date, meetings| %>
         <%= date.day %>
         <% meetings.each do |meeting| %>
             <div style="width: 18rem;">
-              <div class="">
+              <div class="cancel-fade">
                 <h6 class="btn btn-outline-secondary my-1">
                   <%= meeting.start_time.strftime("%H:%M") %>  - <%= meeting.duration%> mins <br>
-                  <%= link_to 'Cancel this booking', booking_cancel_path(meeting), method: :patch  %>
+                  <%= link_to 'Cancel this booking', booking_cancel_path(meeting), method: :patch, data: { remote: true }, class: "cancel" %>
                 </h6>
               </div>
             </div>
