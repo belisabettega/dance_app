@@ -1,7 +1,7 @@
 <%= month_calendar(events: @bookings) do |date, meetings| %>
   <%= date.day %>
   <% meetings.each do |meeting| %>
-    <div style="width: 18rem;">
+    <div>
       <div class="cancel-fade booked">
         <h6 class="agenda-event my-1">
           <%= meeting.start_time.strftime("%H:%M") %>  - <%= meeting.duration%> mins <br>
