@@ -16,7 +16,6 @@
 // const imagePath = (name) => images(name, true)
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 import 'bootstrap';
 import { initMapbox } from '../plugins/init_mapbox';
 
@@ -30,7 +29,8 @@ const events = document.querySelectorAll('.agenda-event')
 if(events) {
  
   $('td.day').on("click", function(){
-    console.log('clicked');
+    
+    
   });
 
   $('.agenda-event').on("click", function(){
