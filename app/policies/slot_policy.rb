@@ -1,7 +1,7 @@
 class SlotPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all.where(teacher_id: user.teacher.id, provisional: true)
+      scope.all.where(teacher_id: user.teacher.id)
     end
   end
 

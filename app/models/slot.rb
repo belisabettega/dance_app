@@ -6,4 +6,8 @@ class Slot < ApplicationRecord
 
   validates :duration, inclusion: { in: DURATION }
   delegate :user, to: :teacher
+
+  def booked?
+    !self.bookings.where(status: true).empty?
+  end
 end

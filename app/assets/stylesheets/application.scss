@@ -99,3 +99,23 @@
   margin-top: 20px;
   display: flex;
 }
+
+.agenda-event{
+  padding: 2px;
+  border-radius: 3px;
+  width: 120px;
+  font-size: 12px;
+  color: white;
+}
+
+.booked{
+  background-color: red;
+}
+
+.free{
+  background-color: green;
+}
+
+.reserved {
+  background-color: rgb(121, 134, 203);
+}
