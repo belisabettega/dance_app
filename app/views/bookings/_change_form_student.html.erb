@@ -1,0 +1,13 @@
+<div class="form-change booked change-form">
+  <a href="#" onclick="hideForm()"><%= fa_icon "window-close", class: "white-link mx-2" %></a>
+  <p><%= @slot.start_time.strftime("%H:%M") %>  - <%= @slot.duration%> mins <br></p>
+  <%= link_to "See details", teacher_path(@slot.teacher), class: "btn btn-outline-light my-2" %>
+  <%= link_to 'Cancel this booking', booking_cancel_path(@slot.booking_active), method: :patch, class: "btn btn-outline-light my-2"%>
+</div>
+
+<script>
+  const hideForm = () => {
+    $('#<%= @slot.id %> .form-change').remove();
+    $('#<%= @slot.id %>').show();
+  };
+</script>

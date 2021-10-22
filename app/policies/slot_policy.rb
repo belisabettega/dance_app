@@ -18,7 +18,7 @@ class SlotPolicy < ApplicationPolicy
   end
 
   def change?
-    record.user == user
+    record.user == user || record.booking_active.user == user
   end
 
   def bookable?
