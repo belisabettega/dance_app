@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     get 'change', to: 'slots#change', as: :change
     patch 'reserve', to: 'slots#reserve', as: :reserve
     patch 'bookable', to: 'slots#bookable', as: :bookable
-    resources :bookings, only: [:create]
+    resources :bookings, only: [:new, :create]
+    post 'book_for_user', to: 'bookings#book_for_user', as: :book_for_user
   end
   resources :bookings, only: [:index] do
     patch 'cancel', to: 'bookings#cancel', as: :cancel

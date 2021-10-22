@@ -12,4 +12,8 @@ class User < ApplicationRecord
   def is_a_teacher?
     !teacher.nil?
   end
+
+  def to_label
+    self.full_name
+  end
 end

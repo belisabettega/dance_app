@@ -1,7 +1,12 @@
 class BookingsController < ApplicationController
   def index
     @bookings = policy_scope(Booking)
-    # @bookings = @bookings.select! do |item| item.slot.start_time >= DateTime.now end
+  end
+
+  def new
+    @slot = Slot.find(params[:slot_id])
+    @booking = Booking.new(slot_id: @slot.id)
+    authorize @booking
   end
 
   def create
@@ -31,6 +36,19 @@ class BookingsController < ApplicationController
       end
     else
       redirect_to bookings_path, notice: "Sorry, something went wrong"
+    end
+  end
+
+  def book_for_user
+    @slot = Slot.find(params[:slot_id])
+    @booking = Booking.new(slot_id: @slot.id)
+    authorize @booking
+    user_id = params[:booking][:user_id]
+    if @booking.update!(user_id: user_id)
+      @slot.update!(provisional: false)
+      redirect_to slots_path, notice: "Booking successfully created!"
+    else
+      redirect_to slots_path, notice: "Something went wrong"
     end
   end
 end
