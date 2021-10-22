@@ -8,6 +8,14 @@ class Slot < ApplicationRecord
   delegate :user, to: :teacher
 
   def booked?
-    !self.bookings.where(status: true).empty?
+    self.provisional == false && !self.bookings.where(status: true).empty?
+  end
+
+  def reserved?
+    self.provisional == false
+  end
+
+  def booking_active
+    self.bookings.where(status: true).first
   end
 end

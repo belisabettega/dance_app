@@ -27,11 +27,7 @@ class BookingsController < ApplicationController
           format.json { head :no_content }
         end
       else
-        respond_to do |format|
-          format.js
-          format.html { redirect_to slots_path, notice: "The booking was cancelled!" }
-          format.json { head :no_content }
-        end
+        redirect_to slots_path, notice: "The booking was cancelled!"
       end
     else
       redirect_to bookings_path, notice: "Sorry, something went wrong"

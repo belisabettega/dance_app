@@ -1,9 +1,10 @@
 <div class="my-5 mx-3">
-  <div id="new-slot">
-    <%= link_to "Create a Slot", new_slot_path, remote: true, class: "btn btn-outline-secondary" %>
-  </div>
+  
   <div class="my-3">
     <h1> Your next classes:</h1>
+    <div id="new-slot" class="my-3">
+      <%= link_to "Create a Slot", new_slot_path, remote: true, class: "btn btn-outline-secondary" %>
+    </div>
     <div id="events_calendar">
       <%= render partial: "calendar", locals: { events: @slots } %>
     </div>
@@ -15,12 +16,6 @@
         <li><span style='background: green;'></span>Available for booking</li>
         <li><span style='background: rgb(121, 134, 203);'></span>Reserved</li>
       </ul>
-    </div>
-  </div>
-  <div class="my-3" >
-    <h1>Your available slots:</h1>
-    <div class="my-3 d-flex flex-wrap" id="slots-list">
-      <%= render @slots %>
     </div>
   </div>
 </div>

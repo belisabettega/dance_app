@@ -34,3 +34,25 @@
 .my-legend a {
   color: #777;
   }
+
+.booked{
+  background-color: red;
+}
+
+.free{
+  background-color: green;
+}
+
+.reserved {
+  background-color: rgb(121, 134, 203);
+}
+
+.change-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  
+}
