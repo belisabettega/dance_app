@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :slots, only: [:index, :new, :create] do
     get 'change', to: 'slots#change', as: :change
     patch 'reserve', to: 'slots#reserve', as: :reserve
+    patch 'bookable', to: 'slots#bookable', as: :bookable
     resources :bookings, only: [:create]
   end
   resources :bookings, only: [:index] do

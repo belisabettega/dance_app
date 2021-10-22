@@ -47,6 +47,16 @@ class SlotsController < ApplicationController
     end
   end
 
+  def bookable
+    @slot = Slot.find(params[:slot_id])
+    authorize @slot
+    if @slot.update(provisional: true)
+      redirect_to slots_path, notice: "The slot is now bookable!" 
+    else
+      redirect_to slots_path, notice: "Sorry, something went wrong" 
+    end
+  end
+
   def change
     @slot = Slot.find(params[:slot_id])
     authorize @slot

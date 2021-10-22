@@ -20,4 +20,8 @@ class SlotPolicy < ApplicationPolicy
   def change?
     record.user == user
   end
+
+  def bookable?
+    record.user == user
+  end
 end
