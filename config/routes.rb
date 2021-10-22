@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :teachers, only: [:index, :show, :new, :create]
   resources :slots, only: [:index, :new, :create] do
+    get 'change', to: 'slots#change', as: :change
     patch 'reserve', to: 'slots#reserve', as: :reserve
     resources :bookings, only: [:create]
   end

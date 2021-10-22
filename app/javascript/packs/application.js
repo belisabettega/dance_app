@@ -15,26 +15,19 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+require("@rails/ujs")
+require("turbolinks").start()
+require("@rails/activestorage").start()
+require("channels")
+
 import 'mapbox-gl/dist/mapbox-gl.css';
 import 'bootstrap';
+import { Tooltip, Toast, Popover } from 'bootstrap';
 import { initMapbox } from '../plugins/init_mapbox';
+import { initializeTooltip } from '../plugins/init_tooltip';
 
 
 document.addEventListener('turbolinks:load', () => {
+  initializeTooltip();
   initMapbox();
 })
-
-const events = document.querySelectorAll('.agenda-event')
-
-if(events) {
- 
-  $('td.day').on("click", function(){
-    
-    
-  });
-
-  $('.agenda-event').on("click", function(){
-    console.log('clicked in event');
-  });
-
-}

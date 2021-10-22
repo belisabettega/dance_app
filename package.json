@@ -2,11 +2,16 @@
   "name": "dance_app",
   "private": true,
   "dependencies": {
+    "@popperjs/core": "^2.10.2",
+    "@rails/activestorage": "^6.1.4-1",
+    "@rails/ujs": "^6.1.4-1",
     "@rails/webpacker": "4.3.0",
     "bootstrap": "4.6",
+    "channels": "^0.0.4",
     "jquery": "^3.6.0",
     "mapbox-gl": "^2.5.1",
-    "popper.js": "^1.16.1"
+    "popper.js": "^1.16.1",
+    "turbolinks": "^5.2.0"
   },
   "devDependencies": {
     "webpack-dev-server": "^4.3.1"

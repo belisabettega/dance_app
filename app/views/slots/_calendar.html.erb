@@ -10,12 +10,14 @@
         </div>
       </div>
     <% elsif meeting.provisional == false %>
-      <div>
+      <div id="<%= meeting.id%>">
+      <%= link_to slot_change_path(meeting), remote: true do%>
         <div class="cancel-fade reserved">
           <h6 class="agenda-event my-1">
             <%= meeting.start_time.strftime("%H:%M") %>  - <%= meeting.duration%> mins <br>
           </h6>
         </div>
+      <% end %>
       </div>
     <% else %>
       <div>

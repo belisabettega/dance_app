@@ -1,0 +1,13 @@
+<div class="form-change">
+  <a href="#" onclick="hideForm()"><%= fa_icon "window-close" %></a>
+  <p><%= @slot.start_time.strftime("%H:%M") %>  - <%= @slot.duration%> mins <br></p>
+  <%= link_to 'Make this slot available', slot_reserve_path(@slot), method: :patch, class: "btn btn-outline-secondary my-2"%>
+  <%= link_to 'Book a class', slot_reserve_path(@slot), method: :patch, class: "btn btn-outline-secondary my-2"%>
+</div>
+
+<script>
+  const hideForm = () => {
+    $('#<%= @slot.id %> .form-change').remove();
+    $('#<%= @slot.id %>').show();
+  };
+</script>

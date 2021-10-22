@@ -16,4 +16,8 @@ class SlotPolicy < ApplicationPolicy
   def reserve?
     record.user == user
   end
+
+  def change?
+    record.user == user
+  end
 end
