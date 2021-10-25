@@ -25,9 +25,12 @@ import 'bootstrap';
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initializeTooltip } from '../plugins/init_tooltip';
+import { changeNavbar } from '../plugins/change_navbar';
 
 
 document.addEventListener('turbolinks:load', () => {
+  changeNavbar();
   initializeTooltip();
   initMapbox();
 })
+
