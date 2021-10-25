@@ -26,10 +26,12 @@ import { Tooltip, Toast, Popover } from 'bootstrap';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initializeTooltip } from '../plugins/init_tooltip';
 import { changeNavbar } from '../plugins/change_navbar';
+import { calendarListener } from '../plugins/calendar_listener';
 
 
 document.addEventListener('turbolinks:load', () => {
   changeNavbar();
+  calendarListener();
   initializeTooltip();
   initMapbox();
 })

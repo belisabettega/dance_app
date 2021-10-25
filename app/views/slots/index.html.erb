@@ -1,10 +1,30 @@
 <div class="my-5 mx-3">
+
+<%= week_calendar(number_of_weeks: 1, events: @slots) do |date, meetings| %>
+  <%= date %>
+    <div>
+      <ul class="day <%= date.day%><%= date.month%><%= date.year%>">
+        <li class="slice 0600" data-hour="0600">06:00</li>
+        <li class="slice 0615" data-hour="0615">06:15</li>
+        <li class="slice 0630" data-hour="0630">06:30</li>
+        <li class="slice 0645" data-hour="0645">06:45</li>
+        <li class="slice 0700" data-hour="0700">07:00</li>
+        <li class="slice 0715" data-hour="0715">07:15</li>
+      </ul>
+    </div>
+  
+  <% meetings.each do |meeting| %>
+    <div class="calendar_entry" data-day="<%=meeting.start_time.day%><%= meeting.start_time.month%>" data-hour="<%=meeting.start_time.hour%><%= meeting.start_time.min%>"><%= meeting.start_time%></div>
+  <% end %>
+
+<% end %>
+
   
   <div class="my-3">
     <h1> Your next classes:</h1>
     <div id="new-slot" class="my-3">
       <%= link_to "Create a Slot", new_slot_path, remote: true, class: "btn btn-outline-secondary" %>
-    </div>
+    </div> 
     <div id="events_calendar">
       <%= render partial: "calendar", locals: { events: @slots } %>
     </div>

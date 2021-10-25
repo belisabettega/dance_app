@@ -2,8 +2,6 @@ class SlotsController < ApplicationController
   def index
     @slots = policy_scope(Slot)
     @slot = Slot.new
-    # @avaliable_slots = Slot.all.where(teacher_id: current_user.teacher.id, provisional: false)
-    # @bookings = Booking.all.where(slot: @avaliable_slots, status: true)
   end
 
   def new
@@ -12,6 +10,7 @@ class SlotsController < ApplicationController
   end
 
   def create
+    byebug
     @slot = Slot.new(slot_params)
     authorize @slot
     @slot.teacher_id = current_user.teacher.id

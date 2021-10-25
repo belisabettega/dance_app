@@ -1,29 +1,21 @@
 <% if @slot.booked? %>
   <div class="form-change booked change-form">
-    <a href="#" onclick="hideForm()"><%= fa_icon "window-close", class: "white-link mx-2" %></a>
+    <a data-id="<%= @slot.id%>" href="#" ><%= fa_icon "window-close", class: "close white-link mx-2" %></a>
     <p><%= @slot.start_time.strftime("%H:%M") %>  - <%= @slot.duration%> mins <br></p>
     <%= link_to 'Cancel this booking', booking_cancel_path(@slot.booking_active), method: :patch, class: "btn btn-outline-light my-2"%>
   </div>
 <% elsif @slot.reserved? %>
   <div class="form-change reserved change-form">
-    <a href="#" onclick="hideForm()"><%= fa_icon "window-close", class: "white-link mx-2" %></a>
+    <a data-id="<%= @slot.id%>" href="#" ><%= fa_icon "window-close", class: "close white-link mx-2" %></a>
     <p><%= @slot.start_time.strftime("%H:%M") %>  - <%= @slot.duration%> mins <br></p>
     <%= link_to 'Make it bookable', slot_bookable_path(@slot), method: :patch, class: "btn btn-outline-light my-2"%>
     <%= link_to 'Book a class', new_slot_booking_path(@slot), class: "btn btn-outline-light my-2"%>
   </div>
 <% else %>
   <div class="form-change free change-form">
-    <a href="#" onclick="hideForm()"><%= fa_icon "window-close", class: "white-link mx-2" %></a>
+    <a data-id="<%= @slot.id%>" href="#" ><%= fa_icon "window-close", class: "close white-link mx-2" %></a>
     <p><%= @slot.start_time.strftime("%H:%M") %>  - <%= @slot.duration%> mins <br></p>
     <%= link_to 'Reserve this slot', slot_reserve_path(@slot), method: :patch, class: "btn btn-outline-light my-2"%>
     <%= link_to 'Book a class', new_slot_booking_path(@slot), class: "btn btn-outline-light my-2"%>
   </div>
 <% end %>
-
-
-<script>
-  const hideForm = () => {
-    $('#<%= @slot.id %> .form-change').remove();
-    $('#<%= @slot.id %>').show();
-  };
-</script>
