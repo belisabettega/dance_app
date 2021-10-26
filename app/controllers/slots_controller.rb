@@ -13,7 +13,7 @@ class SlotsController < ApplicationController
     start_time = DateTime.strptime(params[:date], '%d/%m/%Y, %H:%M:%S')
     @slot = Slot.new(start_time: start_time, teacher_id: current_user.teacher.id)
     authorize @slot
-    if @slot.save
+    if @slot.save!
       redirect_to slots_path, notice: "The slot was created!"
     else
       redirect_to slots_path, notice: "Sorry, something went wrong"
