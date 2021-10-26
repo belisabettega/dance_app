@@ -5,7 +5,6 @@ function calendarListener() {
   
 
   $('.slice').on('click', function(){
-    console.log('hello slice');
     const arrayDate = $(this).parent().attr("class").split(/\s+/)[1].split('');
     const day = parseInt(arrayDate[0] + arrayDate[1], 10);
     const month = parseInt(arrayDate[2] + arrayDate[3], 10);

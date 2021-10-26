@@ -10,23 +10,15 @@ class SlotsController < ApplicationController
   end
 
   def create
-    byebug
-    @slot = Slot.new(slot_params)
+    start_time = DateTime.parse(params[:date])
+    @slot = Slot.new(start_time: start_time, teacher_id: current_user.teacher.id)
     authorize @slot
-    @slot.teacher_id = current_user.teacher.id
     if @slot.save
-      respond_to do |format|
-      format.js
-      # format.html { redirect_to slots_path, notice: "The slot was created!" }
-      end
+      redirect_to slots_path, notice: "The slot was created!"
     else
-      respond_to do |format|
-        format.html { render 'index' }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
-      end
+      redirect_to slots_path, notice: "Sorry, something went wrong"
     end
-
-    end
+  end
 
   def reserve
     @slot = Slot.find(params[:slot_id])
@@ -61,9 +53,4 @@ class SlotsController < ApplicationController
     authorize @slot
   end
 
-  private
-
-  def slot_params
-    params.require(:slot).permit(:start_time, :duration)
-  end
 end
