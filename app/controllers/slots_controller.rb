@@ -10,7 +10,7 @@ class SlotsController < ApplicationController
   end
 
   def create
-    start_time = DateTime.parse(params[:date])
+    start_time = DateTime.strptime(params[:date], '%d/%m/%Y, %H:%M:%S')
     @slot = Slot.new(start_time: start_time, teacher_id: current_user.teacher.id)
     authorize @slot
     if @slot.save
@@ -20,21 +20,23 @@ class SlotsController < ApplicationController
     end
   end
 
+  def update
+    @slot = Slot.find(params[:id])
+    authorize @slot
+    if @slot.update(duration: params[:duration])
+      redirect_to slots_path, notice: "The slot was updated!"
+    else
+      redirect_to slots_path, notice: "Sorry, something went wrong"
+    end
+  end
+
   def reserve
     @slot = Slot.find(params[:slot_id])
     authorize @slot
-    if @slot.update(provisional: false) && @slot.bookings.map(&:cancel_booking)
-      respond_to do |format|
-        format.js
-        format.html { redirect_to slots_path, notice: "The slot was reserve!" }
-        format.json { head :no_content }
-      end
+    if @slot.update(provisional: false) && @slot.bookings.destroy_all
+      redirect_to slots_path, notice: "The slot was reserve!"
     else
-      respond_to do |format|
-        format.js
-        format.html { redirect_to slots_path, notice: "Sorry, something went wrong" }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
-      end
+      redirect_to slots_path, notice: "Sorry, something went wrong"
     end
   end
 
@@ -53,4 +55,14 @@ class SlotsController < ApplicationController
     authorize @slot
   end
 
+  def destroy
+    @slot = Slot.find(params[:id])
+    authorize @slot
+    @slot.bookings.destroy_all
+    if @slot.destroy
+      redirect_to slots_path, notice: "The slot was deleted!"
+    else
+      redirect_to slots_path, notice: "Sorry, something went wrong" 
+    end
+  end
 end
