@@ -1,8 +1,29 @@
+function positionSlots(){
+  const existingSlots = $('.calendar-entry');
+  if(existingSlots){
+    existingSlots.each(function(){
+      const date = $(this).data('day');
+      const hour = $(this).data('hour');
+      const daySlotsList = $('#' + date);
+      const listElementHour = daySlotsList.find('.' + hour)[0]
+      listElementHour.replaceWith($(this)[0]);
+    });
+  }
+
+
+  $('.calendar-entry').on('click', function(){
+    console.log('hello entry');
+    // User query selector for the day and the hour of the calendar entry (available in data attributtes) - to find the slice
+    // use the class of the html I want to put in front of the slice to store the new html
+    // change the html from the slice to the new one
+  });
+}
+
 function listenToCreateSlot(){
   const timeSlice = document.querySelectorAll('.slice');
   if(timeSlice){
     $('.slice').on('click', function(){
-      let arrayDate = $(this).parent().attr("class").split(/\s+/)[1].split('');
+      let arrayDate = $(this).parent().attr("id").split('');
       if(arrayDate.length == 7) {
         arrayDate.unshift('0');
       }
@@ -84,31 +105,21 @@ function listenToBookClass(){
       let slotId = $(this).data('id');
       let slotDate = $(this).data('date');
       $('.modal-title').html(slotDate);
-      $('.modal-body').html(slotId);
+      $('input#booking_id').val(slotId);
       $('#bookClass').modal('show');
     });
   }
 }
 
 function calendarListener() {
-  const closeIcon = document.querySelectorAll('.close');
-
-  const futureEvents = document.querySelectorAll('.td.day');
   
+  positionSlots();
   listenToCreateSlot();
   listenToReserveSlot();
   listenToDeleteSlot();
   listenToUnreserveSlot();
   listenToChangeDurationOfSlot();
   listenToBookClass();
-
-
-  $('.calendar-entry').on('click', function(){
-    console.log('hello entry');
-    // User query selector for the day and the hour of the calendar entry (available in data attributtes) - to find the slice
-    // use the class of the html I want to put in front of the slice to store the new html
-    // change the html from the slice to the new one
-  });
  
 };
 

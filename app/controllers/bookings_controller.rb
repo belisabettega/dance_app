@@ -3,12 +3,6 @@ class BookingsController < ApplicationController
     @bookings = policy_scope(Booking)
   end
 
-  def new
-    @slot = Slot.find(params[:slot_id])
-    @booking = Booking.new(slot_id: @slot.id)
-    authorize @booking
-  end
-
   def create
     @slot = Slot.find(params[:slot_id])
     @booking = Booking.new(slot_id: @slot.id, user_id: current_user.id)
@@ -40,7 +34,7 @@ class BookingsController < ApplicationController
   end
 
   def book_for_user
-    @slot = Slot.find(params[:slot_id])
+    @slot = Slot.find(params[:booking][:id])
     @booking = Booking.new(slot_id: @slot.id)
     authorize @booking
     user_id = params[:booking][:user_id]

@@ -2,7 +2,7 @@ class Slot < ApplicationRecord
   belongs_to :teacher
   has_many :bookings
 
-  DURATION = [60, 80, 90]
+  DURATION = [60, 90, 120]
 
   validates :duration, inclusion: { in: DURATION }
   delegate :user, to: :teacher

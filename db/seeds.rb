@@ -43,7 +43,7 @@ def create_random_date_time_obj
 end
 
 def create_random_duration
-  [60, 80, 90].sample
+  Slot::DURATION.sample
 end
 
 [teacher_1, teacher_2, teacher_3, teacher_4].each do |teacher|
