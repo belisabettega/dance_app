@@ -2,7 +2,10 @@ function listenToCreateSlot(){
   const timeSlice = document.querySelectorAll('.slice');
   if(timeSlice){
     $('.slice').on('click', function(){
-      const arrayDate = $(this).parent().attr("class").split(/\s+/)[1].split('');
+      let arrayDate = $(this).parent().attr("class").split(/\s+/)[1].split('');
+      if(arrayDate.length == 7) {
+        arrayDate.unshift('0');
+      }
       const day = parseInt(arrayDate[0] + arrayDate[1], 10);
       const monthIndex = parseInt(arrayDate[2] + arrayDate[3], 10) - 1;
       const year = parseInt(arrayDate[4] + arrayDate[5] + arrayDate[6] + arrayDate[7] , 10);
@@ -74,6 +77,18 @@ function listenToChangeDurationOfSlot(){
   }
 }
 
+function listenToBookClass(){
+  const bookClassLink = document.querySelectorAll('.book-link');
+  if(bookClassLink){
+    $('.book-link').on('click', function(){
+      let slotId = $(this).data('id');
+      let slotDate = $(this).data('date');
+      $('.modal-title').html(slotDate);
+      $('.modal-body').html(slotId);
+      $('#bookClass').modal('show');
+    });
+  }
+}
 
 function calendarListener() {
   const closeIcon = document.querySelectorAll('.close');
@@ -85,6 +100,7 @@ function calendarListener() {
   listenToDeleteSlot();
   listenToUnreserveSlot();
   listenToChangeDurationOfSlot();
+  listenToBookClass();
 
 
   $('.calendar-entry').on('click', function(){
@@ -93,9 +109,6 @@ function calendarListener() {
     // use the class of the html I want to put in front of the slice to store the new html
     // change the html from the slice to the new one
   });
-
-  
-
  
 };
 

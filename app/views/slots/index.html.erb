@@ -77,6 +77,9 @@
       </div>
     
     <% meetings.each do |meeting| %>
+
+
+
       <% if meeting.booked? %>
         <div class="calendar-entry" data-id="<%=meeting.id %>" data-day="<%=meeting.start_time.strftime("%d%m%Y") %>" data-hour="<%=meeting.start_time.strftime("%H%M") %>">
           <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
@@ -146,9 +149,14 @@
             <div class="duration-box">90</div>
             <% end %>
           </div>
-          <a class="book-link my-1">Book Class</a>
+          <a class="book-link my-1" 
+          data-id="<%=meeting.id %>" 
+          data-date="<%=meeting.start_time.strftime("%d/%m/%Y - %H:%M") %>">
+          Book Class
+          </a>
         </div>
       <% end %>
+      <%= render 'modal', slot: meeting %>
     <% end %>
   <% end %>
   <div class='my-legend my-3'>
