@@ -4,19 +4,34 @@ function positionSlots(){
     existingSlots.each(function(){
       const date = $(this).data('day');
       const hour = $(this).data('hour');
+      const duration = $(this).data('duration-number');
       const daySlotsList = $('#' + date);
-      const listElementHour = daySlotsList.find('.' + hour)[0]
+      const listElementHour = daySlotsList.find('.' + hour);
+      const listElementPlus15 = listElementHour.next('li');
+      listElementPlus15.hide();
+      const listElementPlus30 = listElementPlus15.next('li');
+      listElementPlus30.hide();
+      const listElementPlus45 = listElementPlus30.next('li');
+      listElementPlus45.hide();
+      if(duration == '6'){
+        const listElementPlus60 = listElementPlus45.next('li');
+        listElementPlus60.hide();
+        const listElementPlus75 = listElementPlus60.next('li');
+        listElementPlus75.hide();
+      }
+      if(duration == '8'){
+        const listElementPlus60 = listElementPlus45.next('li');
+        listElementPlus60.hide();
+        const listElementPlus75 = listElementPlus60.next('li');
+        listElementPlus75.hide();
+        const listElementPlus90 = listElementPlus75.next('li');
+        listElementPlus90.hide();
+        const listElementPlus105 = listElementPlus90.next('li');
+        listElementPlus105.hide();
+      }
       listElementHour.replaceWith($(this)[0]);
     });
   }
-
-
-  $('.calendar-entry').on('click', function(){
-    console.log('hello entry');
-    // User query selector for the day and the hour of the calendar entry (available in data attributtes) - to find the slice
-    // use the class of the html I want to put in front of the slice to store the new html
-    // change the html from the slice to the new one
-  });
 }
 
 function listenToCreateSlot(){

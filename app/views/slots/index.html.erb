@@ -2,7 +2,9 @@
 
   <%= week_calendar(number_of_weeks: 1, events: @slots) do |date, meetings| %>
     <%= date %>
-    <ul id="<%= date.day%><%= date.month%><%= date.year%>">
+    <ul 
+      id="<%= date.day.to_s.split('').size == 1 ? date.day.to_s.split('').prepend('0').join : date.day %><%= date.month.to_s.split('').size == 1 ? date.month.to_s.split('').prepend('0').join : date.month%><%= date.year%>" 
+      class="day">
       <li class="slice 0600" data-hour="0600">06:00</li>
       <li class="slice 0615" data-hour="0615">06:15</li>
       <li class="slice 0630" data-hour="0630">06:30</li>
@@ -77,7 +79,11 @@
     <% meetings.each do |meeting| %>
 
       <% if meeting.booked? %>
-        <div class="calendar-entry" data-id="<%=meeting.id %>" data-day="<%=meeting.start_time.strftime("%d%m%Y") %>" data-hour="<%=meeting.start_time.strftime("%H%M") %>">
+        <div class="calendar-entry" 
+          data-id="<%=meeting.id %>"
+          data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
+          data-hour="<%=meeting.start_time.strftime("%H%M") %>"
+          data-duration-number="<%=meeting.number_of_slots %>">
           <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
           <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
           <div class="d-flex justify-content-around my-1">
@@ -100,7 +106,11 @@
           <%= link_to 'Cancel Class', booking_cancel_path(meeting.booking_active), method: :patch, class: "book-link my-1"%>
         </div>
       <% elsif meeting.reserved? %>
-        <div class="calendar-entry" data-id="<%=meeting.id %>" data-day="<%=meeting.start_time.strftime("%d%m%Y") %>" data-hour="<%=meeting.start_time.strftime("%H%M") %>">
+        <div class="calendar-entry"
+          data-id="<%=meeting.id %>"
+          data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
+          data-hour="<%=meeting.start_time.strftime("%H%M") %>"
+          data-duration-number="<%=meeting.number_of_slots %>">
           <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
           <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
           <a class="m-1 unreserve-link">Make it bookable</a>
@@ -121,10 +131,13 @@
             <div class="duration-box"><%=Slot::DURATION[2]%></div>
             <% end %>
           </div>
-          <a class="book-link my-1">Book Class</a>
         </div>
       <% else %>
-        <div class="calendar-entry" data-id="<%=meeting.id %>" data-day="<%=meeting.start_time.strftime("%d%m%Y") %>" data-hour="<%=meeting.start_time.strftime("%H%M") %>">
+        <div class="calendar-entry"
+          data-id="<%=meeting.id %>"
+          data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
+          data-hour="<%=meeting.start_time.strftime("%H%M") %>"
+          data-duration-number="<%=meeting.number_of_slots %>">
           <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
           <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
           <a class="my-1 reserve-link">Reserve</a>

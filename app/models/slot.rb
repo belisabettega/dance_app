@@ -18,4 +18,14 @@ class Slot < ApplicationRecord
   def booking_active
     self.bookings.where(status: true).first
   end
+
+  def number_of_slots
+    if self.duration == 60
+      4
+    elsif self.duration == 90
+      6
+    else
+      8
+    end
+  end
 end
