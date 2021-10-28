@@ -68,7 +68,9 @@
 
   .prev-month {}
   .next-month { }
-  .current-month {}
+  .current-month {
+    height: 200px;
+  }
 
   .has-events {}
 }

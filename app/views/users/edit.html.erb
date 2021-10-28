@@ -1,0 +1,8 @@
+<div class="container my-5">
+  <h1>Edit existing profile information</h1>
+  <%= simple_form_for @user do |f| %>
+    <%= f.input :full_name, label: "Enter your new full name here" %>
+    <%= f.input :photo, as: :file, label: "Upload a new photo" %>
+    <%= f.submit %>
+  <% end %>
+</div>

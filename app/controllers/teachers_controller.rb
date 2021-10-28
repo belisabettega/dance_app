@@ -36,6 +36,21 @@ class TeachersController < ApplicationController
     end
   end
 
+  def edit
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
+  end
+
+  def update
+    @teacher = Teacher.find(params[:id])
+    authorize @teacher
+    if @teacher.update(teacher_params) && @teacher.user.update(full_name: params[:teacher][:user][:full_name])
+      redirect_to teacher_path(@teacher), notice: "Your profile was updated!"
+    else
+      redirect_to teacher_path(@teacher), notice: "Something went wrong!"
+    end
+  end
+
   private
 
   def teacher_params

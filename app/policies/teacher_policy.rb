@@ -16,4 +16,12 @@ class TeacherPolicy < ApplicationPolicy
   def create?
     !user&.is_a_teacher?
   end
+
+  def edit?
+    user&.is_a_teacher?
+  end
+
+  def update?
+    record.user == user
+  end
 end

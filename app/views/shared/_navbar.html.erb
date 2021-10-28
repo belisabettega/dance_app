@@ -31,7 +31,11 @@
               <% if policy(Teacher).new? %>
                 <%= link_to "Become a teacher", new_teacher_path, class: "dropdown-item" %>
               <% end %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <% if policy(Teacher).edit? %>
+                <%= link_to "Edit my profile", edit_teacher_path(current_user.teacher), class: "dropdown-item" %>
+              <% else %>
+                <%= link_to "Edit my profile", edit_user_path(current_user), class: "dropdown-item" %>
+              <% end %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             </div>
           </li>
