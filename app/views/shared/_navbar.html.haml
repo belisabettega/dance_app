@@ -1,0 +1,33 @@
+.navbar.navbar-expand-sm.navbar-light.navbar-lewagon
+  .container
+    = link_to root_path, class: "navbar-brand" do
+      - image_tag "dance.png", alt: "Dancing"
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarSupportedContent", "data-toggle" => "collapse", type: "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      %ul.navbar-nav.mr-auto
+        - if user_signed_in?
+          %li.nav-item
+            = link_to "Teachers", teachers_path, class: "nav-link"
+          %li.nav-item
+            - if policy(Slot).create?
+              = link_to "Teacher dashboard", slots_path, class: "nav-link"
+          %li.nav-item
+            = link_to "Student dashboard", bookings_path, class: "nav-link"
+          %li.nav-item.dropdown
+            - if current_user.photo.attached?
+              = cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false
+            - else
+              = image_tag "user.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false
+            .dropdown-menu.dropdown-menu-right{"aria-labelledby" => "navbarDropdown"}
+              - if policy(Teacher).new?
+                = link_to "Become a teacher", new_teacher_path, class: "dropdown-item"
+              - if policy(Teacher).edit?
+                = link_to "Edit my profile", edit_teacher_path(current_user.teacher), class: "dropdown-item"
+              - else
+                = link_to "Edit my profile", edit_user_path(current_user), class: "dropdown-item"
+              = link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item"
+        - else
+          %li.nav-item
+            = link_to "Login", new_user_session_path, class: "nav-link"
+

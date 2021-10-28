@@ -5,75 +5,20 @@
     <ul 
       id="<%= date.day.to_s.split('').size == 1 ? date.day.to_s.split('').prepend('0').join : date.day %><%= date.month.to_s.split('').size == 1 ? date.month.to_s.split('').prepend('0').join : date.month%><%= date.year%>" 
       class="day">
-      <li class="slice 0600" data-hour="0600">06:00</li>
-      <li class="slice 0615" data-hour="0615">06:15</li>
-      <li class="slice 0630" data-hour="0630">06:30</li>
-      <li class="slice 0645" data-hour="0645">06:45</li>
-      <li class="slice 0700" data-hour="0700">07:00</li>
-      <li class="slice 0715" data-hour="0715">07:15</li>
-      <li class="slice 0730" data-hour="0730">07:30</li>
-      <li class="slice 0745" data-hour="0745">07:45</li>
-      <li class="slice 0800" data-hour="0800">08:00</li>
-      <li class="slice 0815" data-hour="0815">08:15</li>
-      <li class="slice 0830" data-hour="0830">08:30</li>
-      <li class="slice 0845" data-hour="0845">08:45</li>
-      <li class="slice 0900" data-hour="0900">09:00</li>
-      <li class="slice 0915" data-hour="0915">09:15</li>
-      <li class="slice 0930" data-hour="0930">09:30</li>
-      <li class="slice 0945" data-hour="0945">09:45</li>
-      <li class="slice 1000" data-hour="1000">10:00</li>
-      <li class="slice 1015" data-hour="1015">10:15</li>
-      <li class="slice 1030" data-hour="1030">10:30</li>
-      <li class="slice 1045" data-hour="1045">10:45</li>
-      <li class="slice 1100" data-hour="1100">11:00</li>
-      <li class="slice 1115" data-hour="1115">11:15</li>
-      <li class="slice 1130" data-hour="1130">11:30</li>
-      <li class="slice 1145" data-hour="1145">11:45</li>
-      <li class="slice 1200" data-hour="1200">12:00</li>
-      <li class="slice 1215" data-hour="1215">12:15</li>
-      <li class="slice 1230" data-hour="1230">12:30</li>
-      <li class="slice 1245" data-hour="1245">12:45</li>
-      <li class="slice 1300" data-hour="1300">13:00</li>
-      <li class="slice 1315" data-hour="1315">13:15</li>
-      <li class="slice 1330" data-hour="1330">13:30</li>
-      <li class="slice 1345" data-hour="1345">13:45</li>
-      <li class="slice 1400" data-hour="1400">14:00</li>
-      <li class="slice 1415" data-hour="1415">14:15</li>
-      <li class="slice 1430" data-hour="1430">14:30</li>
-      <li class="slice 1445" data-hour="1445">14:45</li>
-      <li class="slice 1500" data-hour="1500">15:00</li>
-      <li class="slice 1515" data-hour="1515">15:15</li>
-      <li class="slice 1530" data-hour="1530">15:30</li>
-      <li class="slice 1545" data-hour="1545">15:45</li>
-      <li class="slice 1600" data-hour="1600">16:00</li>
-      <li class="slice 1615" data-hour="1615">16:15</li>
-      <li class="slice 1630" data-hour="1630">16:30</li>
-      <li class="slice 1645" data-hour="1645">16:45</li>
-      <li class="slice 1700" data-hour="1700">17:00</li>
-      <li class="slice 1715" data-hour="1715">17:15</li>
-      <li class="slice 1730" data-hour="1730">17:30</li>
-      <li class="slice 1745" data-hour="1745">17:45</li>
-      <li class="slice 1800" data-hour="1800">18:00</li>
-      <li class="slice 1815" data-hour="1815">18:15</li>
-      <li class="slice 1830" data-hour="1830">18:30</li>
-      <li class="slice 1845" data-hour="1845">18:45</li>
-      <li class="slice 1900" data-hour="1900">19:00</li>
-      <li class="slice 1915" data-hour="1915">19:15</li>
-      <li class="slice 1930" data-hour="1930">19:30</li>
-      <li class="slice 1945" data-hour="1945">19:45</li>
-      <li class="slice 2000" data-hour="2000">20:00</li>
-      <li class="slice 2015" data-hour="2150">20:15</li>
-      <li class="slice 2030" data-hour="2300">20:30</li>
-      <li class="slice 2045" data-hour="2450">20:45</li>
-      <li class="slice 2100" data-hour="2100">21:00</li>
-      <li class="slice 2115" data-hour="2115">21:15</li>
-      <li class="slice 2130" data-hour="2130">21:30</li>
-      <li class="slice 2145" data-hour="2145">21:45</li>
-      <li class="slice 2200" data-hour="2200">22:00</li>
-      <li class="slice 2215" data-hour="2215">22:15</li>
-      <li class="slice 2230" data-hour="2230">22:30</li>
-      <li class="slice 2245" data-hour="2245">22:45</li>
-      <li class="slice 2300" data-hour="2300">23:00</li>
+    <% hour = '0600' %>
+    <% while hour != '2300' %>
+      <% array_hour = hour.split('') %>
+      <% minutes = array_hour[2] + array_hour[3] %>
+      <% if minutes == '00' || minutes == '15' || minutes == '30' %>
+       <% hour = (hour.to_i + 15).to_s %>
+       <% hour = hour.split('').unshift('0').join if hour.split('').size == 3 %>
+       <li class="slice <%= hour%>" data-hour=<%= hour%>><%= hour%></li>
+       <% elsif minutes == '45' %>
+       <% hour = (hour.to_i + 55).to_s %>
+       <% hour = hour.split('').unshift('0').join if hour.split('').size == 3 %>
+       <li class="slice <%= hour%>" data-hour=<%= hour%>><%= hour%></li>
+      <% end %>
+    <% end %>
     </ul>
     
     <% meetings.each do |meeting| %>

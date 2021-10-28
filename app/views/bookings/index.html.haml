@@ -1,0 +1,17 @@
+.my-5.mx-3
+  %h1 Your next classes:
+  #events_calendar
+    = render partial: "calendar", locals: { events: @bookings }
+  .my-5.d-flex.justify-content-around
+    - @bookings&.each do |booking|
+      .card.cancel-fade{style: "width: 18rem;"}
+        .card-body.text-center
+          %h5.card-title
+            = booking.start_time.strftime("%d/%m/%Y")
+          %h6.card-subtitle.mb-2.text-muted
+            = booking.start_time.strftime("%H:%M")
+            \- #{booking.duration} mins
+          %p
+            = booking.teacher.full_name
+          = link_to 'Cancel this class', booking_cancel_path(booking), method: :patch, class: "btn btn-outline-secondary my-2 cancel", data: { remote: true }
+          = link_to "See details", teacher_path(booking.teacher), class: "btn btn-outline-secondary my-2"

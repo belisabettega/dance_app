@@ -1,0 +1,12 @@
+= week_calendar(number_of_weeks: 1, events: @bookings) do |date, meetings|
+  = date.day
+  - meetings.each do |meeting|
+    %div{id: "#{meeting.slot.id}"}
+      = link_to slot_change_path(meeting.slot), remote: true do
+        %div
+          .cancel-fade.booked
+            %h6.agenda-event.my-1
+              = meeting.start_time.strftime("%H:%M")
+              \- #{meeting.duration} mins
+              %br/
+
