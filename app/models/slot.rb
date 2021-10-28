@@ -28,4 +28,8 @@ class Slot < ApplicationRecord
       8
     end
   end
+
+  def student
+    self.booking_active.user
+  end
 end

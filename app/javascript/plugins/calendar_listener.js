@@ -63,7 +63,7 @@ function listenToReserveSlot(){
   const reserveLink = document.querySelectorAll('.reserve-link');
   if(reserveLink){
     $('.reserve-link').on('click', function(){
-      const slotId = $(this).parent().attr('data-id');
+      const slotId = $(this).parent().parent().attr('data-id');
       $.ajax({
         method: "PATCH",
         url: 'slots/' + slotId + '/reserve'
@@ -76,7 +76,7 @@ function listenToDeleteSlot(){
   const deleteLink = document.querySelectorAll('.delete-slot');
   if(deleteLink){
     $('.delete-slot').on('click', function(){
-      const slotId = $(this).parent().attr('data-id');
+      const slotId = $(this).parent().parent().attr('data-id');
       $.ajax({
         method: "DELETE",
         url: 'slots/' + slotId
@@ -89,7 +89,7 @@ function listenToUnreserveSlot(){
   const unreserveLink = document.querySelectorAll('.unreserve-link');
   if(unreserveLink){
     $('.unreserve-link').on('click', function(){
-      const slotId = $(this).parent().attr('data-id');
+      const slotId = $(this).parent().parent().attr('data-id');
       $.ajax({
         method: "PATCH",
         url: 'slots/' + slotId + '/bookable'

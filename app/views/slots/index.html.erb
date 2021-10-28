@@ -1,5 +1,4 @@
 <div class="my-5 mx-3">
-
   <%= week_calendar(number_of_weeks: 1, events: @slots) do |date, meetings| %>
     <%= date %>
     <ul 
@@ -24,13 +23,63 @@
     <% meetings.each do |meeting| %>
 
       <% if meeting.booked? %>
-        <div class="calendar-entry" 
+        <div class="calendar-entry p-2"
+            data-id="<%=meeting.id %>"
+            data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
+            data-hour="<%=meeting.start_time.strftime("%H%M") %>"
+            data-duration-number="<%=meeting.number_of_slots %>">
+
+            <div class="d-flex justify-content-end">
+              <%= fa_icon "trash", class: "close-card black-link mx-2 delete-slot" %>
+            </div>
+            <div class="start-hour my-3">
+              <div class="color-box mr-2 booked"></div>
+              <p class="d-block"><%=meeting.start_time.strftime("%b %e, %l:%M %p") %></p>
+            </div>
+            <div class="d-flex justify-content-around my-1">
+              <% if meeting.duration == Slot::DURATION[0] %>
+                <div class="duration-box active-box"><%=Slot::DURATION[0]%></div>
+              <% else %>
+              <div class="duration-box"><%=Slot::DURATION[0]%></div>
+              <% end %>
+              <% if meeting.duration == Slot::DURATION[1] %>
+                <div class="duration-box active-box"><%=Slot::DURATION[1]%></div>
+              <% else %>
+              <div class="duration-box"><%=Slot::DURATION[1]%></div>
+              <% end %>
+              <% if meeting.duration == Slot::DURATION[2] %>
+                <div class="duration-box active-box"><%=Slot::DURATION[2]%></div>
+              <% else %>
+              <div class="duration-box"><%=Slot::DURATION[2]%></div>
+              <% end %>
+            </div>
+            <div class="booked-class my-2">
+              <%= link_to booking_cancel_path(meeting.booking_active), method: :patch, class: "book-link my-1" do %>
+              <%= fa_icon "user", class:"mr-3" %>Cancel Class
+              <%end%>
+              <div class="d-flex align-items-center my-2">
+                <% if meeting.student.photo.attached? %>
+                  <%= cl_image_tag meeting.student.photo.key, class: "avatar" %><p class="d-flex ml-2"><%= meeting.student.full_name %></p>
+                <% else %>
+                  <%= image_tag "user.jpg", class: "avatar"%><p class="d-flex ml-2"><%= meeting.student.full_name %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+      <% elsif meeting.reserved? %>
+        <div class="calendar-entry p-2"
           data-id="<%=meeting.id %>"
           data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
           data-hour="<%=meeting.start_time.strftime("%H%M") %>"
           data-duration-number="<%=meeting.number_of_slots %>">
-          <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
-          <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
+
+          <div class="d-flex justify-content-end">
+            <%= fa_icon "trash", class: "close-card black-link mx-2 delete-slot" %>
+          </div>
+          <div class="start-hour my-3">
+            <div class="color-box mr-2 reserved"></div>
+            <p class="d-block"><%=meeting.start_time.strftime("%b %e, %l:%M %p") %></p>
+          </div>
           <div class="d-flex justify-content-around my-1">
             <% if meeting.duration == Slot::DURATION[0] %>
               <div class="duration-box active-box"><%=Slot::DURATION[0]%></div>
@@ -48,44 +97,24 @@
             <div class="duration-box"><%=Slot::DURATION[2]%></div>
             <% end %>
           </div>
-          <%= link_to 'Cancel Class', booking_cancel_path(meeting.booking_active), method: :patch, class: "book-link my-1"%>
-        </div>
-      <% elsif meeting.reserved? %>
-        <div class="calendar-entry"
-          data-id="<%=meeting.id %>"
-          data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
-          data-hour="<%=meeting.start_time.strftime("%H%M") %>"
-          data-duration-number="<%=meeting.number_of_slots %>">
-          <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
-          <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
-          <a class="m-1 unreserve-link">Make it bookable</a>
-          <div data-id="<%=meeting.id %>" class="d-flex justify-content-around my-1">
-            <% if meeting.duration == Slot::DURATION[0] %>
-              <div class="duration-box active-box"><%=Slot::DURATION[0]%></div>
-            <% else %>
-            <div class="duration-box"><%=Slot::DURATION[0]%></div>
-            <% end %>
-            <% if meeting.duration == Slot::DURATION[1] %>
-              <div class="duration-box active-box"><%=Slot::DURATION[1]%></div>
-            <% else %>
-            <div class="duration-box"><%=Slot::DURATION[1]%></div>
-            <% end %>
-            <% if meeting.duration == Slot::DURATION[2] %>
-              <div class="duration-box active-box"><%=Slot::DURATION[2]%></div>
-            <% else %>
-            <div class="duration-box"><%=Slot::DURATION[2]%></div>
-            <% end %>
+          <div class="link-container">
+            <a class="my-1 unreserve-link"><%= fa_icon "toggle-off", class:"mr-3" %> Make it bookable </a>
           </div>
         </div>
       <% else %>
-        <div class="calendar-entry"
+        <div class="calendar-entry p-2"
           data-id="<%=meeting.id %>"
           data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
           data-hour="<%=meeting.start_time.strftime("%H%M") %>"
           data-duration-number="<%=meeting.number_of_slots %>">
-          <div class="start-hour"><%=meeting.start_time.strftime("%H:%M") %></div>
-          <%= fa_icon "window-close", class: "close-card black-link mx-2 delete-slot" %>
-          <a class="my-1 reserve-link">Reserve</a>
+
+          <div class="d-flex justify-content-end">
+            <%= fa_icon "trash", class: "close-card black-link mx-2 delete-slot" %>
+          </div>
+          <div class="start-hour my-3">
+            <div class="color-box mr-2 free"></div>
+            <p class="d-block"><%=meeting.start_time.strftime("%b %e, %l:%M %p") %></p>
+          </div>
           <div class="d-flex justify-content-around my-1">
             <% if meeting.duration == Slot::DURATION[0] %>
               <div class="duration-box active-box"><%=Slot::DURATION[0]%></div>
@@ -103,11 +132,14 @@
             <div class="duration-box"><%=Slot::DURATION[2]%></div>
             <% end %>
           </div>
-          <a class="book-link my-1"
-          data-id="<%=meeting.id %>" 
-          data-date="<%=meeting.start_time.strftime("%d/%m/%Y - %H:%M") %>">
-          Book Class
-          </a>
+          <div class="link-container">
+            <a class="my-1 reserve-link"><%= fa_icon "toggle-off", class:"mr-3" %> Reserve</a>
+            <a class="book-link my-1"
+            data-id="<%=meeting.id %>" 
+            data-date="<%=meeting.start_time.strftime("%d/%m/%Y - %H:%M") %>">
+            <%= fa_icon "user", class:"mr-3" %>Book Class
+            </a>
+          </div>
         </div>
       <% end %>
       <%= render 'modal', slot: meeting %>
