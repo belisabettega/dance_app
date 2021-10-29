@@ -1,0 +1,4 @@
+valid_booking:
+  user: nicolas
+  slot: valid_slot
+  status: true

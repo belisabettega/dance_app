@@ -1,12 +1,20 @@
 mariana:
   full_name: "Mariana Rodrigues"
   email: test1@example.org
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password1') %
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password1') %>
 carlos:
   full_name: null
   email: test2@example.org
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password2') %
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password2') %>
 as12:
   full_name: "as12"
   email: test3@example.org
-  encrypted_password: <%= Devise::Encryptor.digest(User, 'password3') %
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password3') %>
+nicolas:
+  full_name: "Nicolas Morales"
+  email: nicolas@morales.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password3') %>
+luiz:
+  full_name: "Luiz Carlos"
+  email: luiz@carlos.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password3') %>

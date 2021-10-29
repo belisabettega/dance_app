@@ -1,0 +1,14 @@
+slot_with_wrong_duration:
+  teacher: mariana
+  start_time: <%= DateTime.current.to_date %>
+  duration: 180
+  provisional: false
+slot_in_the_past:
+  teacher: mariana
+  start_time: <%= DateTime.yesterday %>
+  duration: 90
+  provisional: false
+valid_slot:
+  teacher: mariana
+  start_time: <%= DateTime.tomorrow %>
+  provisional: false

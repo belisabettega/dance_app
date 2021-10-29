@@ -5,8 +5,10 @@ class Slot < ApplicationRecord
   DURATION = [60, 90, 120]
 
   validates :duration, inclusion: { in: DURATION }
-  delegate :user, to: :teacher
+  validate :date_have_to_be_in_the_future
 
+  delegate :user, to: :teacher
+  
   def booked?
     self.provisional == false && !self.bookings.where(status: true).empty?
   end
@@ -31,5 +33,11 @@ class Slot < ApplicationRecord
 
   def student
     self.booking_active.user
+  end
+
+  def date_have_to_be_in_the_future
+    if start_time < DateTime.current.to_date
+      errors.add(:base, "start time can't be in the past")
+    end
   end
 end

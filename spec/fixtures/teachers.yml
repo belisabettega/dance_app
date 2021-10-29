@@ -8,3 +8,8 @@ carlos:
   description: "In this salsa class I'll show students how"
   price: 30
   address: "Marlborough School, Draycott Ave, SW3 3AP"
+luiz:
+  user: luiz
+  description: "In this salsa class I'll show students how to warm up and move safely, demonstrate how to perform dance moves and give them feedback."
+  price: 50
+  address: "Marlborough School, Draycott Ave, SW3 3AP"
