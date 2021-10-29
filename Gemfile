@@ -52,6 +52,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.1.0'
   gem 'rubocop', require: false
   gem 'pry', '~> 0.13.1'
+  gem 'cucumber'
+  gem 'launchy'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
 end
 
 group :development do
