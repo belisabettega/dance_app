@@ -18,6 +18,24 @@
   color: white;
   display: flex;
   align-items: center;
+  p {
+    font-family: 'Cormorant Garamond', Serif;
+    font-size: 30px;
+  }
+  h1{
+    font-family:'Fira Sans', Sans-Serif;
+    font-size: 50px;
+  }
+}
+
+h1{
+  font-family:'Fira Sans', Sans-Serif;
+  font-size: 40px;
+}
+
+.citation {
+  font-family:'Fira Sans', Sans-Serif;
+  font-size: 23px;
 }
 
 .footer {

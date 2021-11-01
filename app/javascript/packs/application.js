@@ -27,6 +27,7 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initializeTooltip } from '../plugins/init_tooltip';
 import { changeNavbar } from '../plugins/change_navbar';
 import { calendarListener } from '../plugins/calendar_listener';
+import { loadDynamicBannerText } from '../components/banner';
 
 
 document.addEventListener('turbolinks:load', () => {
@@ -34,5 +35,6 @@ document.addEventListener('turbolinks:load', () => {
   calendarListener();
   initializeTooltip();
   initMapbox();
+  loadDynamicBannerText();
 })
 

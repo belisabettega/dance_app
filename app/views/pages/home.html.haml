@@ -1,22 +1,23 @@
 .col.p-5.home-banner
   .container
     %div
-      %p Shall we dance?
+      %p
+        %span{ id:"banner-typed-text" }
       %h1
         We're not Lopez,
         %br/
         but you can dance like Gere.
-      .mt-3= link_to "Get to Know our teachers", teachers_path, class: "btn btn-outline-secondary"
+      .mt-3= link_to "Get to Know our teachers", teachers_path, class: "btn btn-outline-secondary mt-3"
 .container
   .row.right-margin
     .col.my-5
       = fa_icon "quote-left 4x", class: "text-muted pull-left"
-      %h2 Best experience I had, so easy to manage my dance classes and also a incredible way to connect with other teachers and with new students
+      %h2{class: 'citation'} Best experience I had, so easy to manage my dance classes and also a incredible way to connect with other teachers and with new students
       = fa_icon "quote-right 4x", class: "text-muted pull-right"
   .row.left-margin
     .col.my-5
       = fa_icon "quote-left 4x", class: "text-muted pull-left"
-      %h2 After so many months in quarantine, shall we dance is the perfect solution to explore, find and schedule fun dance classes like tango and salsa within seconds
+      %h2{class: 'citation'} After so many months in quarantine, shall we dance is the perfect solution to explore, find and schedule fun dance classes like tango and salsa within seconds
       = fa_icon "quote-right 4x", class: "text-muted pull-right"
 .footer
   .container.d-flex.justify-content-between
