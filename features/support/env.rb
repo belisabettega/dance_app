@@ -5,6 +5,8 @@
 # files.
 
 require 'cucumber/rails'
+require 'capybara/cucumber'
+require 'selenium/webdriver'
 
 # frozen_string_literal: true
 
@@ -57,4 +59,12 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Capybara.register_driver :headless_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu window-size=1400,900])
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+end
+Capybara.save_path = Rails.root.join('tmp/capybara')
+Capybara.javascript_driver = :headless_chrome
+Capybara.default_driver = :headless_chrome
 
