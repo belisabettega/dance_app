@@ -1,0 +1,39 @@
+<%= week_calendar(number_of_weeks: 1, events: @bookings) do |date, meetings| %>
+  <%= date %>
+  
+  <% meetings.each do |meeting| %>
+
+      <div class="calendar-entry p-2"
+          data-id="<%=meeting.id %>"
+          data-day="<%=meeting.start_time.strftime("%d%m%Y") %>"
+          data-hour="<%=meeting.start_time.strftime("%H%M") %>">
+
+          <div class="d-flex justify-content-end">
+            <%= fa_icon "trash", class: "close-card black-link mx-2 delete-slot" %>
+          </div>
+          <div class="start-hour my-3">
+            <div class="color-box mr-2 booked"></div>
+            <p class="d-block"><%=meeting.start_time.strftime("%b %e, %l:%M %p") %></p>
+          </div>
+          <div class="booked-class my-2">
+            <div class="d-flex">
+              <%= fa_icon "hourglass", class:"mr-3" %> <p><%= meeting.duration %> minutes </p>
+            </div>
+            <%= link_to booking_cancel_path(meeting), method: :patch, class: "book-link my-1" do %>
+            <%= fa_icon "user", class:"mr-3" %>Cancel Class
+            <%end%>
+            <div class="d-flex align-items-center my-2">
+              <% if meeting.teacher.photo.attached? %>
+                <%= cl_image_tag meeting.teacher.photo.key, class: "avatar" %><p class="d-flex ml-2"><%= meeting.teacher.full_name %></p>
+              <% else %>
+                <%= image_tag "user.jpg", class: "avatar"%><p class="d-flex ml-2"><%= meeting.teacher.full_name %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+  
+  <% end %>
+<% end %>
+  
+  
+ 

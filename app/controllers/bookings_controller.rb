@@ -20,11 +20,7 @@ class BookingsController < ApplicationController
     authorize @booking
     if @booking.cancel_booking && @booking.slot.update(provisional: true)
       if @booking.user == current_user
-        respond_to do |format|
-          format.js
-          format.html { redirect_to bookings_path, notice: "The booking was cancelled!" }
-          format.json { head :no_content }
-        end
+        redirect_to bookings_path, notice: "The booking was cancelled!"
       else
         redirect_to slots_path, notice: "The booking was cancelled!"
       end
