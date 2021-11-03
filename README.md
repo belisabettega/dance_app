@@ -30,9 +30,9 @@ npm install --global yarn
 bundle install
 yarn install
 ```
-9) At last, you just need to create the development database, and run the rails server on your local host
+9) At last, you just need to create and seed the development database, and run the rails server on your local host
 ```
-rails db:create db:migrate
+rails db:create db:migrate db:seed
 rails s
 ```
 10) You'll be able to open the application by coping the following link to your browser
@@ -42,7 +42,8 @@ http://localhost:3000/
 
 ## Login in
 
-They app has two types of users: students and teachers. You can sign up using your email, or use an existing teacher for testing purposes. You can use the e-mail 'maria@fernanda.com' and password 'maria1234', which is an existing teacher.
+This app has two types of users: students and teachers. You can sign up using your email, or use an existing teacher for testing purposes. 
+You can use the e-mail 'maria@fernanda.com' and password 'maria1234', which is an existing teacher.
 
 ## Licensing
 [MIT License](https://choosealicense.com/licenses/mit/#)
