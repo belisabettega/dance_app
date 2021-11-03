@@ -37,8 +37,8 @@ end
 def create_random_date_time_obj
   month = rand(10..12)
   day = rand(1..28)
-  hour = rand(1..12)
-  minute = rand(0..59)
+  hour = rand(1..22)
+  minute = [0, 15, 30, 45].sample
   date_time_obj = DateTime.new(2021, month, day, hour, minute, 0)
 end
 
@@ -52,5 +52,5 @@ end
   end
 end
 
-puts '--> Slots and Bookings Generation Completed'
+puts '--> Slots Generation Completed'
 
